@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>نادي برشلونة — موسم 2008/2009 (نسخة محسّنة)</title>
+  <meta name="description" content="صفحة تذكارية لموسم 2008/2009 لبرشلونة بتصميم متجاوب وسريع مع تحسينات وصول وتجربة استخدام." />
+  <meta name="theme-color" content="#0b1220" />
+  <meta property="og:title" content="برشلونة — موسم 2008/2009" />
+  <meta property="og:description" content="تصميم متجاوب وسريع مع تحسينات وصول وتجربة استخدام." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300..800&display=swap" rel="stylesheet">
+  <style>
+    /* ============================
+       Design tokens + base layer
+       ============================ */
+    :root{
+      --maroon:#A50044; /* برشلونة تقريبًا */
+      --blue:#0B3B8C;
+      --gold:#E6B800;
+      --bg:#0b1220;
+      --surface-1: rgba(255,255,255,0.06);
+      --surface-2: rgba(255,255,255,0.03);
+      --text:#eef1f6;
+      --muted:#c7cfdb;
+      --accent:#ffcc00;
+      --radius:14px;
+      --shadow:0 10px 28px rgba(0,0,0,.55);
+      color-scheme: dark light;
+      --step--1: clamp(.85rem, .83rem + .3vw, .95rem);
+      --step-0: clamp(1rem, .95rem + .6vw, 1.125rem);
+      --step-1: clamp(1.15rem, 1.05rem + 1vw, 1.35rem);
+      --step-2: clamp(1.35rem, 1.15rem + 1.5vw, 1.75rem);
+      --step-3: clamp(1.75rem, 1.4rem + 2.2vw, 2.25rem);
+      --container: 1100px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --text:#0f172a; --muted:#475569; --bg:#f4f6fb; --surface-1:#ffffffcc; --surface-2:#ffffff99; }
+      body { background: linear-gradient(180deg,#f3f6ff,#e9efff); }
+    }
+
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:'Cairo',system-ui,Segoe UI,Arial,sans-serif;
+      font-size:var(--step-0);
+      line-height:1.6;
+      background:linear-gradient(180deg,var(--bg),#081026);
+      color:var(--text);
+      accent-color:var(--accent);
+      -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+    }
+    a{color:var(--accent);text-decoration:none}
+    a:focus-visible,button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+
+    .container{max-inline-size:var(--container);margin-inline:auto;padding-inline:clamp(14px,2vw,22px)}
+    .card{background:linear-gradient(180deg,var(--surface-1),var(--surface-2));border-radius:var(--radius);box-shadow:var(--shadow)}
+    .pad{padding:clamp(14px,2.2vw,24px)}
+
+    /* ============================
+       Header / Nav
+       ============================ */
+    .skip-link{position:absolute;inset-block-start:-100%; inset-inline-start:1rem; background:var(--accent); color:#111; padding:.5rem .75rem; border-radius:.5rem}
+    .skip-link:focus{inset-block-start:1rem}
+
+    header{
+      background: linear-gradient(90deg,var(--maroon) 0%, var(--blue) 100%);
+      padding-block:14px; padding-inline:22px;
+      position:sticky; inset-block-start:0; z-index:10;
+      box-shadow:0 6px 18px rgba(0,0,0,0.35);
+    }
+    .header-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+    .brand{display:flex;align-items:center;gap:12px}
+    .crest{inline-size:56px; block-size:56px; border-radius:10px; background:var(--surface-1); display:grid; place-items:center; font-weight:800; font-size:1rem}
+    .title{font-size:var(--step-1); font-weight:800}
+    nav[aria-label]{display:flex; gap:8px; flex-wrap:wrap}
+    nav a{padding:.5rem .8rem; border-radius:10px; background:color-mix(in oklab, white 6%, transparent);}
+
+    /* ============================
+       Hero
+       ============================ */
+    main{padding-block: clamp(16px, 2vw, 24px)}
+    .hero{display:grid; grid-template-columns:1fr 360px; gap:18px}
+    .hero-left{background-image:linear-gradient(135deg, rgba(0,0,0,0.15), rgba(255,255,255,0.04));}
+    .season{font-size:var(--step--1); opacity:.9}
+    h1{margin-block:6px 4px; font-size:var(--step-3)}
+    .lead{margin:0 0 12px; opacity:.95}
+    .cta{display:inline-block; background:var(--accent); color:#111; padding:.65rem 1rem; border-radius:12px; font-weight:800}
+
+    .stats{display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-block:16px 0}
+    .stat{padding:12px; background:color-mix(in oklab, white 4%, transparent); border-radius:10px; text-align:center}
+    .stat strong{display:block; font-size:var(--step-1)}
+
+    .sidebar .mini-card{display:flex; flex-direction:column; gap:8px}
+    .squad-list{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-block-start:8px}
+    .player{padding:8px; border-radius:10px; background:color-mix(in oklab, white 4%, transparent); display:flex; align-items:center; gap:12px}
+    .avatar{inline-size:44px; block-size:44px; border-radius:50%; background:linear-gradient(135deg,var(--blue),var(--maroon)); display:grid; place-items:center; font-weight:800}
+
+    /* ============================
+       Matches + Gallery
+       ============================ */
+    section{scroll-margin-block: 90px}
+    .matches-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:12px}
+    .match{padding:12px; border-radius:10px; background:linear-gradient(180deg, color-mix(in oklab, white 3%, transparent), color-mix(in oklab, white 2%, transparent))}
+    .match h3,.match h4{margin:0 0 6px}
+    .score{font-weight:800; font-size:var(--step-1)}
+
+    .gallery{display:flex; gap:12px; flex-wrap:wrap}
+    .gallery > figure{flex:1 1 240px; min-inline-size:220px; padding:12px; border-radius:10px; background:color-mix(in oklab, white 4%, transparent)}
+    .gallery img{inline-size:100%; block-size:auto; border-radius:8px}
+
+    footer{margin-block:28px; padding:18px; text-align:center; opacity:.9}
+
+    /* ============================
+       Modal (dialog)
+       ============================ */
+    dialog{border:none; border-radius:12px; background:linear-gradient(180deg,#071428,#0f2b48); color:var(--text); inline-size:min(720px,94%); box-shadow:var(--shadow); padding:0}
+    dialog::backdrop{background:rgba(0,0,0,.55)}
+    .modal-card{padding:18px}
+    .modal-actions{display:flex; justify-content:flex-start; margin-block-start:12px}
+    .btn{padding:.55rem .9rem; border-radius:10px; border:0; cursor:pointer}
+    .btn-primary{background:var(--accent); color:#111}
+
+    /* ============================
+       Responsiveness
+       ============================ */
+    @media (max-width: 1000px){ .stats{grid-template-columns:repeat(3, minmax(0,1fr))} }
+    @media (max-width: 900px){ .hero{grid-template-columns:1fr} .sidebar{order:2} }
+    @media (max-width: 520px){ nav[aria-label]{gap:6px} nav a{padding:.45rem .7rem} .squad-list{grid-template-columns:1fr} }
+
+    /* ============================
+       Motion + accessibility niceties
+       ============================ */
+    .ticker{overflow:hidden; white-space:nowrap}
+    .ticker p{display:inline-block; padding-inline-start:100%; animation:scroll 14s linear infinite}
+    @keyframes scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+    @media (prefers-reduced-motion: reduce){
+      html{scroll-behavior:auto}
+      .ticker p{animation:none; padding-inline-start:0}
+    }
+
+    /* Print */
+    @media print{ nav, .cta, .ticker, dialog { display:none !important } body{background:white; color:black} .card{box-shadow:none} }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">تجاوز إلى المحتوى</a>
+  <header role="banner">
+    <div class="header-inner container">
+      <div class="brand" aria-label="هوية الموقع">
+        <div class="crest" aria-hidden="true">FCB</div>
+        <div>
+          <div class="title">فريق برشلونة</div>
+          <div class="season">موسم 2008–2009 — الموقع التذكاري</div>
+        </div>
+      </div>
+      <nav aria-label="القائمة الرئيسية">
+        <a href="#about">عن الموسم</a>
+        <a href="#squad">التشكيل</a>
+        <a href="#matches">المباريات</a>
+        <a href="#gallery">صور</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main">
+    <!-- Hero -->
+    <section class="hero" id="about">
+      <article class="hero-left card pad">
+        <p class="season">موسم تذكاري</p>
+        <h1>برشلونة — موسم 2008/2009</h1>
+        <p class="lead">تصميم متجاوب يعطي إحساسًا كلاسيكيًا لموسم 2009، مع ألوان النادي وخط عربي حديث. المحتوى قابل للتعديل بسهولة.</p>
+        <p><button class="cta btn btn-primary" id="open-season" aria-haspopup="dialog" aria-controls="season-dialog">شاهد تفاصيل الموسم</button></p>
+
+        <div class="stats" aria-label="الإنجازات الرئيسية">
+          <div class="stat" role="group" aria-label="الدوري"><span>الدوري</span><strong>الفائز</strong></div>
+          <div class="stat" role="group" aria-label="كأس الملك"><span>كأس الملك</span><strong>الفائز</strong></div>
+          <div class="stat" role="group" aria-label="دوري الأبطال"><span>دوري الأبطال</span><strong>الفائز</strong></div>
+        </div>
+
+        <div class="card pad" style="margin-block-start:14px">
+          <h2 class="season" style="margin:0 0 6px">نبذة سريعة</h2>
+          <p>هذا القالب مُحسَّن للأداء والوصول: علامات دلالية، مفاتيح لوحة المفاتيح للمودال، صور كسولة، ودعم <span lang="en">prefers-reduced-motion</span>.</p>
+        </div>
+      </article>
+
+      <aside class="sidebar card pad" aria-labelledby="squad-heading">
+        <div class="mini-card">
+          <h2 id="squad-heading">التشكيل الأساسي — (قابل للتعديل)</h2>
+          <div class="squad-list" id="squad" role="list"></div>
+          <p style="margin-block-start:12px; font-size:var(--step--1); color:var(--muted)">ملاحظة: هذه قائمة مبدئية. عدّل الأسماء والصور كما تريد.</p>
+        </div>
+
+        <div class="mini-card" style="margin-block-start:12px">
+          <h3>أخبار سريعة</h3>
+          <div class="ticker card pad" aria-live="polite">
+            <p>برشلونة — أهداف لا تُنسى • تشكيلة الموسم • لحظات تاريخية • احتفالات الجماهير</p>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Matches -->
+    <section class="card pad" id="matches" aria-labelledby="matches-title">
+      <h2 id="matches-title">بعض مباريات الموسم</h2>
+      <div class="matches-grid">
+        <article class="match" role="article">
+          <h3>نهائي دوري الأبطال</h3>
+          <p class="score">برشلونة 2 — 0 مانشستر يونايتد</p>
+          <p class="meta" style="opacity:.85">ملعب: روما — تاريخ: 27 مايو 2009 (مثال)</p>
+        </article>
+        <article class="match" role="article">
+          <h3>الدوري — مباراة مهمة</h3>
+          <p class="score">برشلونة 1 — 0 سرقسطة</p>
+          <p class="meta" style="opacity:.85">ملعب: الكامب نو — تاريخ: مثال</p>
+        </article>
+        <article class="match" role="article">
+          <h3>كأس الملك — نصف نهائي</h3>
+          <p class="score">برشلونة 5 — 2 ريال مايوركا</p>
+          <p class="meta" style="opacity:.85">تفاصيل قابلة للتعديل</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="card pad" id="gallery" style="margin-block-start:18px" aria-labelledby="gallery-title">
+      <h2 id="gallery-title">معرض صور</h2>
+      <p style="color:var(--muted)">أضف صور الكامب نو، هدف مميز، أو احتفال الكأس. أمثلة أدناه تستخدم تحميلًا كسولًا.</p>
+      <div class="gallery" role="list">
+        <figure role="listitem">
+          <picture>
+            <img src="https://picsum.photos/seed/fcb1/800/500" alt="صورة أرشيفية — احتفال بهدف" loading="lazy" decoding="async" width="800" height="500">
+          </picture>
+          <figcaption>احتفال — مثال صورة 1</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <img src="https://picsum.photos/seed/fcb2/800/500" alt="من المدرجات في الكامب نو" loading="lazy" decoding="async" width="800" height="500">
+          </picture>
+          <figcaption>المدرجات — مثال صورة 2</figcaption>
+        </figure>
+        <figure role="listitem">
+          <picture>
+            <img src="https://picsum.photos/seed/fcb3/800/500" alt="رفع الكأس" loading="lazy" decoding="async" width="800" height="500">
+          </picture>
+          <figcaption>التتويج — مثال صورة 3</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <footer>
+      صُنِع بحب لفريق برشلونة — نسخة تذكارية 2009 • يمكنك نسخ الكود وتعديله محليًا
+    </footer>
+  </main>
+
+  <!-- Dialog (modal) -->
+  <dialog id="season-dialog" aria-labelledby="season-title" aria-describedby="season-desc">
+    <div class="modal-card">
+      <h2 id="season-title">تفاصيل الموسم 2008/2009</h2>
+      <p id="season-desc">هذه مساحة لشرح الإنجازات، اللاعبين، والإحصاءات. حرّر المحتوى كما تحب — استخدم أي صورة أو رابط خارجي.</p>
+      <div class="modal-actions">
+        <button id="close-modal" class="btn btn-primary" type="button">إغلاق</button>
+      </div>
+    </div>
+  </dialog>
+
+  <script>
+    // ============================
+    // Data (editable)
+    // ============================
+    const squad = [
+      {name:'ليونيل ميسي',role:'مهاجم'},
+      {name:'تشافي',role:'صانع ألعاب'},
+      {name:'أندريس إنييستا',role:'وسط'},
+      {name:'كارلس بويول',role:'قلب دفاع'},
+      {name:'جيرارد بيكيه',role:'قلب دفاع'},
+      {name:'صامويل إيتو',role:'مهاجم'}
+    ];
+
+    // Render squad
+    const squadContainer = document.getElementById('squad');
+    squadContainer.innerHTML = squad.map(p=>`
+      <div class="player" role="listitem">
+        <div class="avatar" aria-hidden="true">${p.name.charAt(0)}</div>
+        <div><strong>${p.name}</strong><div style="font-size:var(--step--1); opacity:.8">${p.role}</div></div>
+      </div>
+    `).join('');
+
+    // ============================
+    // Accessible dialog controls
+    // ============================
+    const openBtn = document.getElementById('open-season');
+    const dialog = document.getElementById('season-dialog');
+    const closeBtn = document.getElementById('close-modal');
+
+    function trapFocus(e){
+      if (!dialog.open) return;
+      const focusables = dialog.querySelectorAll('a[href], button:not([disabled]), textarea, input, select, [tabindex]:not([tabindex="-1"])');
+      const first = focusables[0];
+      const last = focusables[focusables.length -1];
+      if (e.key === 'Tab'){
+        if (e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
+      }
+      if (e.key === 'Escape'){ dialog.close(); }
+    }
+
+    openBtn.addEventListener('click', ()=>{
+      dialog.showModal();
+      document.querySelector('main').inert = true; // dim accessibility tree behind dialog
+      dialog.addEventListener('keydown', trapFocus);
+      closeBtn.focus();
+    });
+
+    closeBtn.addEventListener('click', ()=>{ dialog.close(); });
+
+    dialog.addEventListener('close', ()=>{
+      document.querySelector('main').inert = false;
+      dialog.removeEventListener('keydown', trapFocus);
+      openBtn.focus();
+    });
+
+    // Close when clicking backdrop (only when target is dialog itself)
+    dialog.addEventListener('click', (e)=>{ if (e.target === dialog) dialog.close(); });
+  </script>
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>برشلونة 2009 | جيل السداسية</title>
+  <meta name="description" content="موقع تعريفي بسيط عن نادي برشلونة 2009: إنجازات السداسية، أبرز اللاعبين، خطط اللعب، وخط زمني لأهم المباريات." />
+  <style>
+    :root {
+      --garnet: #a50044; /* العنابي */
+      --blue: #004d98;   /* الأزرق */
+      --gold: #ffcc00;   /* الذهبي */
+      --ink: #0d0d0f;
+      --card: #10121a;
+      --muted: #8ea0b6;
+      --bg: #0a0c12;
+      --ring: rgba(255,204,0,.35);
+    }
+    * { box-sizing: border-box }
+    html,body { height: 100% }
+    body {
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, "Noto Kufi Arabic", Tahoma, Arial, sans-serif;
+      /* خلفية برشلونية بخطوط بلاوغرانا + تدرجات */
+      background:
+        radial-gradient(1200px 800px at 80% -10%, rgba(165,0,68,.12), transparent),
+        radial-gradient(1000px 700px at -10% 20%, rgba(0,77,152,.14), transparent),
+        repeating-linear-gradient( 100deg,
+          rgba(165,0,68,.10) 0 16px,
+          rgba(0,77,152,.10) 16px 32px
+        ),
+        var(--bg);
+      color: #e9eef6; line-height: 1.85;
+    }
+    a { color: var(--gold); text-decoration: none }
+    img { max-width: 100%; height: auto; display: block }
+    .container { width: min(1100px, 92vw); margin-inline: auto }
+
+    /* Navbar */
+    header {
+      position: sticky; top: 0; z-index: 50;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(90deg, rgba(10,12,18,.85), rgba(10,12,18,.4));
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: .8rem 0; gap:.8rem; flex-wrap: wrap }
+    .brand { display: flex; align-items: center; gap: .7rem; font-weight: 800; letter-spacing: .3px }
+    .brand .crest { width: 34px; aspect-ratio: 1; border-radius: 10px; background:
+      conic-gradient(from 0deg, var(--garnet) 0 50%, var(--blue) 0 100%);
+      box-shadow: 0 0 0 3px rgba(255,255,255,.04), 0 8px 30px rgba(0,0,0,.25);
+      position: relative; isolation: isolate;
+    }
+    .brand .crest::after{ content:""; position:absolute; inset:18% 18% 18% 18%; border-radius: 6px; background: radial-gradient(circle at 50% 30%, #ffd54f, transparent 60%) }
+    .nav-links { display: flex; gap: .6rem; flex-wrap: wrap }
+    .nav-links a { padding: .45rem .7rem; border-radius: 14px; font-weight: 700; color: #e9eef6 }
+    .nav-links a:hover { background: rgba(255,255,255,.06) }
+    .actions { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap }
+    .btn { border: 1px solid rgba(255,255,255,.12); background: #0c0f18; color: #e9eef6; padding:.7rem .9rem; border-radius: 14px; font-weight:800; cursor:pointer; min-height:44px }
+    .btn:hover{ border-color: var(--ring); box-shadow: 0 0 0 3px var(--ring) }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; align-items: center; padding: 1.6rem 0 1rem }
+    .hero h1 { font-size: clamp(1.6rem, 2.2rem + 1vw, 3rem); margin: 0 0 .6rem; line-height: 1.2 }
+    .badge { display:inline-flex; gap:.5rem; align-items:center; background: linear-gradient(90deg, rgba(165,0,68,.35), rgba(0,77,152,.35)); padding:.35rem .6rem; border:1px solid rgba(255,255,255,.08); border-radius: 999px; font-weight: 800 }
+    .hero p { color: #c9d5e7 }
+    .hero-card { background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02)); border: 1px solid rgba(255,255,255,.06); padding: 1rem; border-radius: 18px; box-shadow: 0 10px 40px rgba(0,0,0,.25) }
+    .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; margin-top: 1rem }
+    .stat { background: var(--card); border: 1px solid rgba(255,255,255,.06); padding: .9rem; border-radius: 14px; text-align: center }
+    .stat .num { display:block; font-weight: 900; font-size: clamp(1.4rem,1.1rem + 1vw,1.9rem) }
+
+    /* Sections */
+    section { padding: 1.6rem 0; scroll-margin-top: 90px }
+    h2 { font-size: clamp(1.2rem, .9rem + 1vw, 1.7rem); margin: 0 0 1rem; letter-spacing: .3px }
+    .grid { display: grid; gap: .8rem }
+    .grid-3 { grid-template-columns: repeat(3, 1fr) }
+    .grid-2 { grid-template-columns: repeat(2, 1fr) }
+
+    /* Players */
+    .filters { display:flex; gap:.6rem; flex-wrap:wrap; margin-bottom: 1rem }
+    .chip { padding:.5rem .75rem; border-radius: 999px; border:1px solid rgba(255,255,255,.12); background:#0c0f18; cursor:pointer; font-weight:800; min-height:40px }
+    .chip[aria-pressed="true"]{ outline: 3px solid var(--ring); border-color: var(--ring) }
+    .player-card { background: var(--card); border: 1px solid rgba(255,255,255,.06); border-radius: 16px; padding: .9rem; display: grid; grid-template-columns: 64px 1fr auto; gap: .8rem; align-items:center }
+    .player-thumb { width:64px; aspect-ratio:1; border-radius: 14px; overflow: hidden; background: linear-gradient(135deg, rgba(165,0,68,.6), rgba(0,77,152,.6)); display:grid; place-items:center; font-weight:900 }
+    .player-name { margin:0; font-weight:900 }
+    .player-pos { color: var(--muted); font-size: .95rem }
+    .player-card button { padding:.45rem .8rem }
+
+    /* Timeline */
+    .timeline { position: relative; padding-right: 1rem }
+    .timeline::before { content:""; position:absolute; right:6px; top:0; bottom:0; width:3px; background: linear-gradient(var(--gold), transparent) }
+    .moment { position:relative; padding-right: 1.7rem; margin-bottom: .9rem }
+    .moment::before { content:""; position:absolute; right:-1px; top:.35rem; width:14px; height:14px; border-radius:50%; background: var(--gold); box-shadow: 0 0 0 4px rgba(255,204,0,.18) }
+    .moment time { font-weight:800; color:#ffd54f }
+
+    /* Gallery */
+    .gallery { display:grid; gap:.8rem; grid-template-columns: repeat(3, 1fr) }
+    .tile { background: #0b0e16; border:1px solid rgba(255,255,255,.08); border-radius: 16px; overflow: hidden }
+    .tile img { width:100%; height:180px; object-fit: cover }
+    .tile .cap { padding:.6rem .7rem; font-weight:700 }
+
+    /* Stadium banner */
+    .banner { position:relative; overflow:hidden; border-radius:18px; border:1px solid rgba(255,255,255,.08) }
+    .banner img { width:100%; height: 280px; object-fit: cover; filter: saturate(1.1) contrast(1.05) }
+    .banner .overlay { position:absolute; inset:0; background: linear-gradient( to left, rgba(10,12,18,.1), rgba(165,0,68,.25) 55%, rgba(0,77,152,.35) ); mix-blend: multiply }
+    .banner .label { position:absolute; right:1rem; bottom:1rem; padding:.5rem .75rem; border-radius:12px; background: rgba(0,0,0,.45); border:1px solid rgba(255,255,255,.12); font-weight:900 }
+
+    /* Modal */
+    .modal { position: fixed; inset: 0; display: none; place-items: center; background: rgba(0,0,0,.5); backdrop-filter: blur(6px) }
+    .modal[open] { display: grid }
+    .modal-card { width: min(720px, 92vw); background: #0b0e16; border:1px solid rgba(255,255,255,.08); border-radius: 18px; padding: 1rem }
+    .modal-top { display:flex; align-items:center; justify-content: space-between; gap:1rem; border-bottom: 1px solid rgba(255,255,255,.06); padding-bottom: .6rem; margin-bottom: .7rem }
+
+    /* Footer */
+    footer { border-top: 1px solid rgba(255,255,255,.06); padding: 1.2rem 0; color: #b9c6d8 }
+
+    /* Responsive */
+    @media (max-width: 860px){
+      .hero { grid-template-columns: 1fr; gap:1rem }
+      .grid-3 { grid-template-columns: 1fr }
+      .grid-2 { grid-template-columns: 1fr }
+      .gallery { grid-template-columns: 1fr 1fr }
+      .player-card { grid-template-columns: 56px 1fr auto }
+      .player-thumb{ width:56px }
+      nav { padding: .6rem 0 }
+    }
+    @media (max-width: 520px){
+      .stats { grid-template-columns: 1fr 1fr }
+      .gallery { grid-template-columns: 1fr }
+      .nav-links { gap:.4rem }
+      .nav-links a { padding:.4rem .55rem }
+      .btn { width: 100% }
+      .actions { width: 100% }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <div class="brand">
+          <div aria-hidden="true" class="crest"></div>
+          <span>برشلونة 2009</span>
+        </div>
+        <div class="nav-links">
+          <a href="#about">عن الفريق</a>
+          <a href="#trophies">الإنجازات</a>
+          <a href="#players">اللاعبون</a>
+          <a href="#timeline">الخط الزمني</a>
+        </div>
+        <div class="actions">
+          <button class="btn" id="themeToggle" aria-pressed="false">وضع داكن/فاتح</button>
+          <a class="btn" href="#players">ابدأ الاستكشاف</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero" id="about">
+      <div>
+        <span class="badge">جيل بيب جوارديولا • 2008–09</span>
+        <h1>برشلونة 2009 — <span style="background:linear-gradient(90deg,var(--gold),#fff);-webkit-background-clip:text;background-clip:text;color:transparent">فريق السداسية التاريخي</span></h1>
+        <p>
+          موسم 2008–09 شهد أفضل نسخة من برشلونة في العصر الحديث تحت قيادة بيب جوارديولا؛ كرة استحواذ سريعة، ضغط عالٍ، وتفاهم
+          مذهل بين <strong>ميسي</strong> و<strong>تشافي</strong> و<strong>إنييستا</strong>. خلال عام 2009 اكتمل الإنجاز الاستثنائي: 
+          <em>السداسية</em> (الدوري، الكأس، دوري الأبطال، السوبر الإسباني، السوبر الأوروبي، وكأس العالم للأندية).
+        </p>
+        <div class="stats">
+          <div class="stat">
+            <span class="num" data-count="6">0</span>
+            <span>ألقاب في 2009</span>
+          </div>
+          <div class="stat">
+            <span class="num" data-count="105">0</span>
+            <span>أهداف بالدوري 08/09</span>
+          </div>
+          <div class="stat">
+            <span class="num" data-count="2.76">0</span>
+            <span>متوسط أهداف/مباراة</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-card">
+        <h3 style="margin:0 0 .4rem">فلسفة اللعب</h3>
+        <ul style="margin:0 0 .6rem; padding-right: 1rem">
+          <li>الاستحواذ + التحولات السريعة</li>
+          <li>أظهُر عالية (ألفيس) لتوسيع الملعب</li>
+          <li>محور ارتكاز ذكي (بوسكيتس/توريه)</li>
+          <li>ثلاثي هجومي مرعب: ميسي، هنري، إيتو</li>
+        </ul>
+        <small style="color:var(--muted)">* الأرقام تقريبية لأغراض العرض.</small>
+      </div>
+    </section>
+
+    <!-- Trophies -->
+    <section id="trophies">
+      <h2>الإنجازات الرئيسية في 2009</h2>
+      <div class="grid grid-3">
+        <div class="stat" role="article"><span class="num">الدوري الإسباني</span><span>2010/2009 (تحقيق الدوري موسم 08/09)</span></div>
+        <div class="stat" role="article"><span class="num">كأس الملك</span><span>2009</span></div>
+        <div class="stat" role="article"><span class="num">دوري أبطال أوروبا</span><span>2009</span></div>
+        <div class="stat" role="article"><span class="num">السوبر الإسباني</span><span>2009</span></div>
+        <div class="stat" role="article"><span class="num">السوبر الأوروبي</span><span>2009</span></div>
+        <div class="stat" role="article"><span class="num">كأس العالم للأندية</span><span>2009</span></div>
+      </div>
+    </section>
+
+    <!-- Players -->
+    <section id="players">
+      <h2>أبرز لاعبي التشكيلة</h2>
+      <div class="filters" role="toolbar" aria-label="تصفية حسب المركز">
+        <button class="chip" data-pos="all" aria-pressed="true">الكل</button>
+        <button class="chip" data-pos="حارس">حارس</button>
+        <button class="chip" data-pos="دفاع">دفاع</button>
+        <button class="chip" data-pos="وسط">وسط</button>
+        <button class="chip" data-pos="هجوم">هجوم</button>
+      </div>
+      <div class="grid" id="playersGrid" style="gap:.9rem"></div>
+      <p style="color:var(--muted);margin:.6rem 0 0">نصيحة: ضع صورك في مجلد <code>assets/players/</code> بأسماء مشابهة (messi.jpg، xavi.jpg...). النظام يدعم تحميل كسول للصور.</p>
+    </section>
+
+    <!-- Timeline -->
+    <section id="timeline">
+      <h2>الخط الزمني لأهم اللحظات (2009)</h2>
+      <div class="timeline">
+        <article class="moment"><time>13 مايو</time> — الفوز بكأس الملك على بلباو 4–1.</article>
+        <article class="moment"><time>16 مايو</time> — التتويج بالدوري الإسباني (مجموع نقاط قياسي آنذاك).</article>
+        <article class="moment"><time>27 مايو</time> — روما: النهائي الأوروبي 2–0 ضد مانشستر يونايتد (إيتو، ميسي).</article>
+        <article class="moment"><time>23 أغسطس</time> — السوبر الإسباني أمام بلباو (5–1 بالمجموع).
+        </article>
+        <article class="moment"><time>28 أغسطس</time> — السوبر الأوروبي أمام شاختار (1–0).</article>
+        <article class="moment"><time>19 ديسمبر</time> — أبوظبي: كأس العالم للأندية، النهائي 2–1 ضد إستوديانتس (بيدرو، ميسي).</article>
+      </div>
+
+      <div class="banner" style="margin-top:1rem">
+        <img src="assets/stadium/camp-nou.jpg" alt="ملعب كامب نو 2009" loading="lazy" />
+        <div class="overlay"></div>
+        <div class="label">كامب نو — البيت الكتالوني</div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <h2>معرض الصور: الكؤوس والملعب</h2>
+      <div class="gallery">
+        <figure class="tile">
+          <img src="assets/trophies/ucl-2009.jpg" alt="كأس دوري أبطال أوروبا 2009" loading="lazy" />
+          <figcaption class="cap">دوري أبطال أوروبا — روما 2009</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="assets/trophies/cdr-2009.jpg" alt="كأس ملك إسبانيا 2009" loading="lazy" />
+          <figcaption class="cap">كأس ملك إسبانيا — فالنسيا</figcaption>
+        </figure>
+        <figure class="tile">
+          <img src="assets/trophies/cwc-2009.jpg" alt="كأس العالم للأندية 2009" loading="lazy" />
+          <figcaption class="cap">كأس العالم للأندية — أبوظبي</figcaption>
+        </figure>
+      </div>
+    </section>
+  </main>
+
+  <footer class="container">
+    صنع بالـ HTML/CSS/JS — مشروع تعريفي عن برشلونة 2009. 
+    <span style="opacity:.7">© 2025</span>
+  </footer>
+
+  <dialog class="modal" id="playerModal" aria-labelledby="modalTitle" aria-modal="true">
+    <div class="modal-card">
+      <div class="modal-top">
+        <h3 id="modalTitle" style="margin:0">تفاصيل اللاعب</h3>
+        <button class="btn" data-close>إغلاق</button>
+      </div>
+      <div id="modalBody"></div>
+    </div>
+  </dialog>
+
+  <button id="toTop" class="btn" style="position:fixed; left: 1rem; bottom: 1rem; display:none">أعلى</button>
+
+  <script>
+    // بيانات اللاعبين (مختصرة ومبسطة)
+    const players = [
+      { name: 'فيكتور فالديس', pos: 'حارس', number: 1, img: 'valdes.webp',  highlight: 'أفضل حارس في نهائي روما', bio: 'عمود أساسي في بناء اللعب من الخلف.' },
+      { name: 'داني ألفيش', pos: 'دفاع', number: 2, img: 'alves.webp',   highlight: 'صناعة فرص بالجملة', bio: 'جناح مقنَّع على الجهة اليمنى.' },
+      { name: 'جيرارد بيكيه', pos: 'دفاع', number: 3, img: 'pique.webp',  highlight: 'ثقة في البناء', bio: 'عودته من مانشستر يونايتد كانت نقطة تحول.' },
+      { name: 'كارليس بويول', pos: 'دفاع', number: 5, img: 'peol.webp',  highlight: 'قلب الفريق', bio: 'قيادي شرس وتدخلات حاسمة.' },
+      { name: 'إريك أبيدال', pos: 'دفاع', number: 22, img: 'abidal.webp', highlight: 'ثبات دفاعي', bio: 'تغطية مثالية في الجهة اليسرى.' },
+      { name: 'سيرجيو بوسكيتس', pos: 'وسط', number: 28, img: 'busquets.webp', highlight: 'ذكاء تموضع', bio: 'الظهور الأول الكبير مع بيب وأصبح محور المنظومة.' },
+      { name: 'تشافي هيرنانديز', pos: 'وسط', number: 6, img: 'xavi.webp', highlight: 'مايسترو التمرير', bio: 'إملاء إيقاع اللعب بدقة متناهية.' },
+      { name: 'أندريس إنييستا', pos: 'وسط', number: 8, img: 'iniesta.webp', highlight: 'السحر الهادئ', bio: 'لقب "الرسام" لتأثيره الفني الحاسم.' },
+      { name: 'يايا توريه', pos: 'وسط', number: 24, img: 'yaya.webp', highlight: 'حلول بدنية وفنية', bio: 'لعب قلب دفاع في أوقات حرجة بنهائي الكأس.' },
+      { name: 'ليونيل ميسي', pos: 'هجوم', number: 10, img: 'messi.webp', highlight: 'هدف بالرأس في النهائي الأوروبي', bio: 'نجم الفريق الأول في بداية حقبة ذهبية.' },
+      { name: 'تييري هنري', pos: 'هجوم', number: 14, img: 'henry.webp', highlight: 'ثنائية في الكلاسيكو 6–2', bio: 'خبرة وهدوء أمام المرمى.' },
+      { name: 'صامويل إيتو', pos: 'هجوم', number: 9, img: 'eto.webp', highlight: 'افتتاح التسجيل في نهائي روما', bio: 'حاسة تهديف قاتلة وحركة بلا توقف.' }
+    ];
+
+    const grid = document.getElementById('playersGrid');
+    const modal = document.getElementById('playerModal');
+    const modalBody = document.getElementById('modalBody');
+
+    function renderPlayers(filter = 'all'){
+      grid.innerHTML = '';
+      players
+        .filter(p => filter === 'all' ? true : p.pos === filter)
+        .forEach(p => {
+          const card = document.createElement('article');
+          card.className = 'player-card';
+          card.innerHTML = `
+            <div class="player-thumb" aria-hidden="true">
+              ${p.img ? `<img src="${p.img}" alt="${p.name}" loading="lazy" width="128" height="128" onerror="this.style.display='none'"/>` : `<span>${p.number}</span>`}
+            </div>
+            <div>
+              <h4 class="player-name">${p.name}</h4>
+              <div class="player-pos">${p.pos} • ${p.highlight}</div>
+            </div>
+            <div>
+              <button class="btn" data-open>تفاصيل</button>
+            </div>
+          `;
+          card.querySelector('[data-open]').addEventListener('click', () => openPlayer(p));
+          grid.appendChild(card);
+        })
+    }
+
+    function openPlayer(p){
+    modalBody.innerHTML = `
+      <div style="display:grid; grid-template-columns: 120px 1fr; gap:1rem; align-items:start">
+        <div class="player-thumb" style="width:120px">
+          ${p.img ? `<img src='${p.img}' alt='${p.name}' loading='lazy'/>` : `<span>${p.number}</span>`}
+        </div>
+        <div>
+          <h4 style="margin:.2rem 0">${p.name}</h4>
+          <p style="margin:.2rem 0; color:var(--muted)">${p.pos}</p>
+          <p>${p.bio}</p>
+        </div>
+      </div>`;
+    modal.setAttribute('open', '');
+  }
+
+  document.querySelector('[data-close]').addEventListener('click', () => modal.removeAttribute('open'));
+  modal.addEventListener('click', (e) => { if(e.target === modal) modal.removeAttribute('open') });
+    // Filter chips
+    const chips = document.querySelectorAll('.chip');
+    chips.forEach(ch => ch.addEventListener('click', () => {
+      chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+      ch.setAttribute('aria-pressed', 'true');
+      renderPlayers(ch.dataset.pos);
+    }));
+
+    // Stats count up
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry =>{
+        if(entry.isIntersecting){
+          const el = entry.target; const to = parseFloat(el.dataset.count);
+          const isFloat = !Number.isInteger(to);
+          const duration = 1200; const start = performance.now();
+          function tick(now){
+            const p = Math.min(1, (now - start)/duration);
+            const val = to * p;
+            el.textContent = isFloat ? val.toFixed(2) : Math.round(val);
+            if(p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          observer.unobserve(el);
+        }
+      })
+    }, { threshold: .6 });
+    document.querySelectorAll('.num[data-count]').forEach(el => observer.observe(el));
+
+    // Theme toggle
+    const themeBtn = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    themeBtn.addEventListener('click', () => {
+      const dark = root.dataset.theme !== 'light';
+      if(dark){
+        root.dataset.theme = 'light';
+        root.style.setProperty('--bg', '#f7f8fb');
+        root.style.setProperty('--card', '#ffffff');
+        root.style.setProperty('--ink', '#0d0d0f');
+        document.body.style.color = '#1c2430';
+        themeBtn.setAttribute('aria-pressed', 'true');
+      } else {
+        root.dataset.theme = 'dark';
+        root.style.setProperty('--bg', '#0a0c12');
+        root.style.setProperty('--card', '#10121a');
+        document.body.style.color = '#e9eef6';
+        themeBtn.setAttribute('aria-pressed', 'false');
+      }
+      // إعادة طلاء الخلفية
+      document.body.style.background = root.dataset.theme === 'light'
+        ? 'linear-gradient(180deg, #fff, #eef3ff)'
+        : `radial-gradient(1200px 800px at 80% -10%, rgba(165,0,68,.12), transparent),
+           radial-gradient(1000px 700px at -10% 20%, rgba(0,77,152,.14), transparent),
+           repeating-linear-gradient( 100deg, rgba(165,0,68,.10) 0 16px, rgba(0,77,152,.10) 16px 32px), var(--bg)`;
+    });
+
+    // Scroll to top
+    const toTop = document.getElementById('toTop');
+    window.addEventListener('scroll', () => {
+      toTop.style.display = window.scrollY > 400 ? 'block' : 'none';
+    });
+    toTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+
+    // Init
+    renderPlayers();
+  </script>
+</body>
+</html>
